@@ -1,0 +1,65 @@
+﻿@page
+@model BookLibrary_Razor.Pages.Category.IndexModel
+
+<div class="container">
+
+
+    @if (Model.categories.Count == 0)
+    {
+        <p>No Data</p>
+    }
+    else
+    {
+        <div class="pt-4">
+
+            <div class="row relative">
+                <div class="col-6">
+                    <h1 class="text-primary">Category List</h1>
+                </div>
+
+                <div class="col-6 text-end">
+
+                    <a class="btn btn-primary btn-sm btn-outline-light" asp-area="" asp-page="Category/Create">
+                        <i class="bi bi-plus-circle mx-2"></i>Create New Category
+                    </a>
+
+                </div>
+            </div>
+            <div>
+                <table class="table table-bordered table-striped mt-4 text-center">
+                    <thead>
+                        <tr>
+                            <th>Category Id</th>
+                            <th>Category Name</th>
+                            <th>Display Order</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var category in Model.categories.OrderBy(cat=>cat.DisplayOrder))
+                        {
+                            <tr>
+                                <td>@category.Id</td>
+                                <td>@category.Name</td>
+                                <td>@category.DisplayOrder</td>
+                                <td>
+                                    <div class="btn-group w-75 gap-2" role="group">
+                                        <a class="btn btn-primary btn-sm" asp-area="" asp-route-id="@category.Id" asp-page="Category/edit">
+                                            <i class="bi bi-pencil-square mx-2"></i>Edit
+                                        </a>
+                                        <a class="btn btn-outline-danger btn-sm" asp-area="" asp-route-id="@category.Id" asp-page="Category/delete">
+                                            <i class="bi bi-trash-fill mx-2"></i>Delete
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+
+            </div>
+        </div>
+    }
+
+</div>
